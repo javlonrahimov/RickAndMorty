@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="character"
+            type="com.javlonrahimov1212.rickandmorty.models.Character" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height"
+        android:layout_marginStart="@dimen/margin16"
+        android:layout_marginTop="@dimen/margin8"
+        android:layout_marginEnd="@dimen/margin16"
+        android:layout_marginBottom="@dimen/margin8"
+        app:cardCornerRadius="@dimen/cardRadius">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <ImageView
+                android:id="@+id/image"
+                imageUrl="@{character.image}"
+                android:layout_width="@dimen/image_width"
+                android:layout_height="@dimen/wrap_constraint"
+                android:contentDescription="@string/image_character"
+                android:scaleType="centerCrop"
+                android:src="@drawable/image"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="@dimen/wrap_constraint"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin8"
+                android:text="@{character.name}"
+                android:textColor="@android:color/primary_text_light"
+                android:textSize="@dimen/text_size20"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/image"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/status_species"
+                statusDrawable="@{character.status}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin8"
+                android:drawablePadding="@dimen/margin8"
+                android:textColor="@android:color/primary_text_light"
+                android:textSize="@dimen/text_size16"
+                app:layout_constraintStart_toEndOf="@id/image"
+                app:layout_constraintTop_toBottomOf="@id/name"
+                bind:species="@{character.species}"
+                bind:status="@{character.status}" />
+
+            <TextView
+                android:id="@+id/label_location"
+                android:layout_width="@dimen/wrap_constraint"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin8"
+                android:text="@string/last_known_location"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/image"
+                app:layout_constraintTop_toBottomOf="@id/status_species" />
+
+            <TextView
+                android:id="@+id/location"
+                android:layout_width="@dimen/wrap_constraint"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin8"
+                android:layout_marginEnd="@dimen/margin8"
+                android:text="@{character.location}"
+                android:textColor="@android:color/primary_text_light"
+                android:textSize="@dimen/text_size16"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/image"
+                app:layout_constraintTop_toBottomOf="@id/label_location" />
+
+            <TextView
+                android:id="@+id/label_gender"
+                android:layout_width="@dimen/wrap_constraint"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin8"
+                android:text="@string/gender"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/image"
+                app:layout_constraintTop_toBottomOf="@id/location" />
+
+            <TextView
+                android:id="@+id/gender"
+                android:layout_width="@dimen/wrap_constraint"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin8"
+                android:layout_marginEnd="@dimen/margin8"
+                android:text="@{character.gender}"
+                android:textColor="@android:color/primary_text_light"
+                android:textSize="@dimen/text_size16"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/image"
+                app:layout_constraintTop_toBottomOf="@id/label_gender" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>
