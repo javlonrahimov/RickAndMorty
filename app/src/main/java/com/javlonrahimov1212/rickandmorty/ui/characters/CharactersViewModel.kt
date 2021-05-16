@@ -11,7 +11,7 @@ import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
 
-class CharactersViewModel(private val mainRepository: MainRepository) :
+open class CharactersViewModel(private val mainRepository: MainRepository) :
     ViewModel() {
 
     var currentPage = 0

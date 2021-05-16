@@ -15,11 +15,12 @@ import com.javlonrahimov1212.rickandmorty.database.AppDatabase
 import com.javlonrahimov1212.rickandmorty.databinding.FragmentCharactersBinding
 import com.javlonrahimov1212.rickandmorty.network.ApiHelper
 import com.javlonrahimov1212.rickandmorty.network.RetrofitBuilder
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class CharactersFragment : Fragment() {
 
-    private lateinit var viewModel: CharactersViewModel
+    private val viewModel: CharactersViewModel by viewModel()
     private lateinit var adapter: CharacterAdapter
 
     override fun onCreateView(
@@ -27,7 +28,6 @@ class CharactersFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentCharactersBinding.inflate(inflater, container, false)
-        setupViewModel()
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         adapter = CharacterAdapter()
@@ -64,15 +64,5 @@ class CharactersFragment : Fragment() {
             })
 
         return binding.root
-    }
-
-    private fun setupViewModel() {
-        viewModel = ViewModelProviders.of(
-            this,
-            CharactersViewModelFactory(
-                ApiHelper(RetrofitBuilder.apiService),
-                AppDatabase.getDatabase(requireActivity().applicationContext).appDao()
-            )
-        ).get(CharactersViewModel::class.java)
     }
 }

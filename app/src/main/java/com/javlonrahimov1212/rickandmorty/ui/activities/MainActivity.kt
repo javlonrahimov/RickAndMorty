@@ -6,24 +6,20 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.NavHostFragment
 import com.javlonrahimov1212.rickandmorty.R
-import com.javlonrahimov1212.rickandmorty.database.AppDatabase
-import com.javlonrahimov1212.rickandmorty.network.ApiHelper
-import com.javlonrahimov1212.rickandmorty.network.RetrofitBuilder
 import com.javlonrahimov1212.rickandmorty.utils.NetworkStatus
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var viewModel: MainActivityViewModel
+    private val viewModel: MainActivityViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setUpNavigation()
-        setupViewModel()
 
         NetworkStatus.init(application)
         NetworkStatus.observe(this, { isConnected ->
@@ -52,15 +48,5 @@ class MainActivity : AppCompatActivity() {
     private fun setUpNavigation() {
         supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment?
-    }
-
-    private fun setupViewModel() {
-        viewModel = ViewModelProviders.of(
-            this,
-            MainViewModelFactory(
-                ApiHelper(RetrofitBuilder.apiService),
-                AppDatabase.getDatabase(applicationContext).appDao()
-            )
-        ).get(MainActivityViewModel::class.java)
     }
 }
